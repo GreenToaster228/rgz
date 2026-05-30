@@ -1,3 +1,4 @@
+#include "rc6.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
@@ -45,6 +46,7 @@ void rsa(char action, const std::string& key, const fs::path& input, const fs::p
 
 void rc6(char action, const std::string& key, const fs::path& input, const fs::path& output)
 {
+	process_rc6(action, key, input, output);
 }
 
 void enigma(char action, const std::string& key, const fs::path& input, const fs::path& output)
@@ -140,12 +142,14 @@ int main(int argc, char* argv[])
 
 		//проверка на возможность взаимодействия с файлом записи + попытка его создания
 		
-		
- 	   		std::ofstream test_file;
-    			test_file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
+	
+   		std::ofstream test_file;
+    		test_file.exceptions(std::ofstream::failbit | std::ofstream::badbit);
 
-    			test_file.open(output_path);
-    			test_file.close();
+    		test_file.open(output_path, std::ios::binary | std::ios::app);
+    		test_file.close();
+
+
 		}
 		catch (const std::exception& e)
 		{
